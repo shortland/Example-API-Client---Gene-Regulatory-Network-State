@@ -103,3 +103,13 @@ class NetworksApi:
         }
         data = self.apiCall(endpoint, parameters, 'post')
         return data
+
+    def renameNetwork(self, networkId, networkNewName):
+        endpoint = '/rename_network'
+        parameters = {
+            'token': self.clientToken,
+            'networkId': networkId,
+            'networkNewName': networkNewName
+        }
+        data = self.apiCall(endpoint, parameters, 'post')
+        return data
