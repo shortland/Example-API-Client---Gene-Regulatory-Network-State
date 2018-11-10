@@ -1,17 +1,12 @@
 import requests
 
 class NetworksApi:
-    def __init__(self):
+    def __init__(self, clientId, clientSecret):
         self.baseUrl = 'http://138.197.50.244/network2/api'
-        self.clientId = ''
-        self.clientSecret = ''
-        self.clientCode = ''
-        self.clientToken = ''
-
-    def setCredentials(self, clientId, clientSecret):
         self.clientId = clientId
         self.clientSecret = clientSecret
-        return 'Credentials set\n'
+        self.clientCode = self.authorize()
+        self.clientToken = self.acquireToken()
 
     def getCredentials(self):
         return {
@@ -32,6 +27,7 @@ class NetworksApi:
                 url = self.baseUrl + endpoint,
                 data = parameters
             )
+        #print(response.text)
         data = response.json()
         return data
 
@@ -43,10 +39,10 @@ class NetworksApi:
         }
         data = self.apiCall(endpoint, parameters, 'get')
         code = data['message']['code']
-        self.clientCode = code
         return code
     
     def acquireToken(self):
+        print("tokenize again")
         endpoint = '/token'
         parameters = {
             'grant_type': 'authorization_code',
@@ -56,7 +52,6 @@ class NetworksApi:
         }
         data = self.apiCall(endpoint, parameters, 'post')
         token = data['message']['token']
-        self.clientToken = token
         self.clientCode = ''
         return token
 
