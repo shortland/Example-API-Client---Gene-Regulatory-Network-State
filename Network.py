@@ -113,3 +113,21 @@ class NetworksApi:
         }
         data = self.apiCall(endpoint, parameters, 'post')
         return data
+
+    def csvExport(self, networkId):
+        endpoint = '/export_csv'
+        parameters = {
+            'token': self.clientToken,
+            'networkId': networkId
+        }
+        data = self.apiCall(endpoint, parameters, 'get')
+        return data
+
+    def jsonExport(self, networkId):
+        endpoint = '/export_json'
+        parameters = {
+            'token': self.clientToken,
+            'networkId': networkId
+        }
+        data = self.apiCall(endpoint, parameters, 'get')
+        return data
