@@ -76,12 +76,13 @@ class NetworksApi:
         data = self.apiCall(endpoint, parameters, 'get')
         return data
 
-    def modifyNetwork(self, networkId, edgeList):
+    def modifyNetwork(self, networkId, edgeList, save = 'false'):
         endpoint = '/modify_network'
         parameters = {
             'token': self.clientToken,
             'networkId': networkId,
-            'edgeList': str(edgeList)
+            'edgeList': str(edgeList),
+            'save': save
         }
         data = self.apiCall(endpoint, parameters, 'post')
         return data
