@@ -1,6 +1,6 @@
 import requests
 
-class NetworksApi:
+class NetworkApi:
     def __init__(self, clientId, clientSecret):
         self.baseUrl = 'http://138.197.50.244/network2/api'
         self.clientId = clientId
