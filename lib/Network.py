@@ -127,3 +127,13 @@ class NetworkApi:
         }
         data = self.apiCall(endpoint, parameters, 'get')
         return data
+    
+    def networkDiffs(self, oldNetworkId, newNetworkId):
+        endpoint = 'network_diffs'
+        parameters = {
+            'token': self.clientToken,
+            'oldNetworkId': oldNetworkId,
+            'newNetworkId': newNetworkId
+        }
+        data = self.apiCall(endpoint, parameters, 'get')
+        return data
