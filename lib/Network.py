@@ -27,9 +27,10 @@ class NetworkApi:
                 url = self.baseUrl + endpoint,
                 data = parameters
             )
-        #print(response.text)
-        data = response.json()
-        return data
+        try:
+            return response.json()
+        except:
+            return response.text
 
     def authorize(self):
         endpoint = '/authorize'
@@ -42,7 +43,6 @@ class NetworkApi:
         return code
     
     def acquireToken(self):
-        print("tokenize again")
         endpoint = '/token'
         parameters = {
             'grant_type': 'authorization_code',
@@ -71,7 +71,7 @@ class NetworkApi:
         data = self.apiCall(endpoint, parameters, 'get')
         return data
 
-    def modifyNetwork(self, networkId, edgeList, save = 'false'):
+    def modifyNetwork(self, networkId, edgeList, save = 'true'):
         endpoint = '/modify_network'
         parameters = {
             'token': self.clientToken,
@@ -129,7 +129,8 @@ class NetworkApi:
         return data
     
     def networkDiffs(self, oldNetworkId, newNetworkId):
-        endpoint = 'network_diffs'
+        """Gets the node differences between two networks"""
+        endpoint = '/network_diffs'
         parameters = {
             'token': self.clientToken,
             'oldNetworkId': oldNetworkId,
